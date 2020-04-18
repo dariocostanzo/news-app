@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, Text, View, Image, Button } from "react-native";
+import { format } from "date-fns";
 
 const styles = StyleSheet.create({
   screen: {
@@ -58,7 +59,9 @@ export default App = () => {
 
             <View style={styles.text}>
               <Text style={styles.title}> {item.title} </Text>
-              <Text> {"Date: " + item.publishedAt}</Text>
+              <Text>
+                {format(new Date(item.publishedAt), `do MMM yyyy - HH:mm`)}
+              </Text>
             </View>
           </View>
         )}
