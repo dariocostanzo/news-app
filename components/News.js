@@ -15,12 +15,20 @@ const News = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const Item = ({ title, date, thumbnail }) => {
+  const Item = ({ title, content, date, thumbnail, author }) => {
     return (
       <TouchableOpacity
         style={styles.screen}
         onPress={() => {
-          props['props'].navigation.navigate({ routeName: 'Article' });
+          props['props'].navigation.navigate({
+            routeName: 'Article',
+            params: {
+              title: title,
+              content: content,
+              date: date,
+              author: author
+            }
+          });
         }}
       >
         <View style={styles.articleWrapper}>
@@ -59,18 +67,15 @@ const News = props => {
           data={data}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
-            // <TouchableOpacity
-            // onPress={() => {
-            //   props['props'].navigation.navigate({ routeName: 'Article' });
-            // }}
-            // >
             <Item
               title={item.title}
+              content={item.content}
               date={format(new Date(item.publishedAt), `do MMM yyyy - HH:mm`)}
+              author={item.author}
               thumbnail={item.urlToImage}
-              prop={props}
+              props={props}
+              articleData={item}
             />
-            // </TouchableOpacity>
           )}
         />
       )}
@@ -80,7 +85,7 @@ const News = props => {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 40,
+    padding: 20,
     marginTop: 5
   },
   thumbnail: {
