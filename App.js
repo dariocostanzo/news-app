@@ -1,6 +1,6 @@
 import React from 'react';
-import News from './components/News';
+import NewsNavigator from './navigation/NewsNavigator';
 
 export default App = () => {
-  return <News />;
+  return <NewsNavigator />;
 };
