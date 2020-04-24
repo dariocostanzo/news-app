@@ -65,7 +65,7 @@ const News = props => {
       ) : (
         <FlatList
           data={data}
-          keyExtractor={({ id }, index) => id}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <Item
               title={item.title}
