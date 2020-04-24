@@ -8,17 +8,21 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
-  Alert
+  TouchableOpacity
 } from 'react-native';
 
-export default News = () => {
+const News = props => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   const Item = ({ title, date, thumbnail }) => {
     return (
-      <TouchableOpacity style={styles.screen}>
+      <TouchableOpacity
+        style={styles.screen}
+        onPress={() => {
+          props['props'].navigation.navigate({ routeName: 'Article' });
+        }}
+      >
         <View style={styles.articleWrapper}>
           <Image style={styles.thumbnail} source={{ uri: thumbnail }} />
           <View style={styles.titleWrapper}>
@@ -38,12 +42,6 @@ export default News = () => {
     'https://newsapi.org/v2/top-headlines?category=Entertainment&apiKey=';
   const API_KEY = '87ec908411c64892a4c17ad677fb8684';
 
-  const openArticle = direction => {
-    if (direction === 'lower') {
-      Alert.alert(item.title);
-    }
-  };
-
   useEffect(() => {
     fetch(API_URL + API_KEY)
       .then(response => response.json())
@@ -61,11 +59,18 @@ export default News = () => {
           data={data}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
+            // <TouchableOpacity
+            // onPress={() => {
+            //   props['props'].navigation.navigate({ routeName: 'Article' });
+            // }}
+            // >
             <Item
               title={item.title}
               date={format(new Date(item.publishedAt), `do MMM yyyy - HH:mm`)}
               thumbnail={item.urlToImage}
+              prop={props}
             />
+            // </TouchableOpacity>
           )}
         />
       )}
@@ -93,3 +98,4 @@ const styles = StyleSheet.create({
   articleWrapper: { flexDirection: 'row' },
   titleWrapper: { flex: 1, paddingLeft: 2 }
 });
+export default News;
