@@ -10,17 +10,13 @@ import { WebView } from 'react-native-webview';
 
 // The second page will be displayed after selecting an article.
 // It will show the title, the content, the date and the name of the author.
-
+const customData = require('../assets/output.json');
+const data = customData.response.toString();
 const LegalScreen = props => {
-  //   return <WebView source={PolicyHTML} style={{ marginTop: 20 }} />;
   return (
     <Fragment>
-      <WebView
-        source={{
-          uri: 'https://dariocostanzo.github.io/demopage.html'
-        }}
-        style={styles.webview}
-      />
+      <WebView source={{ html: data }} style={styles.webview} />
+
       <View style={styles.buttonsContainer}>
         <TouchableNativeFeedback
           onPress={() => {
