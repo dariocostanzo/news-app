@@ -20,7 +20,7 @@ const LegalScreen = props => {
       <View style={styles.buttonsContainer}>
         <TouchableNativeFeedback
           onPress={() => {
-            props.navigation.navigate({ routeName: 'Home' });
+            props.navigation.goBack();
           }}
         >
           <View style={styles.buttonDecline}>

@@ -16,12 +16,17 @@ const HomeScreen = props => {
     <Fragment>
       <View style={styles.buttonsContainer}>
         <TouchableNativeFeedback
-          onPress={() => {
-            props.navigation.navigate({ routeName: 'Legal' });
-          }}
+          onPress={() => props.navigation.navigate('Legal')}
         >
-          <View style={styles.buttonDecline}>
+          <View style={styles.buttonDocument}>
             <Text style={styles.text}>View Document</Text>
+          </View>
+        </TouchableNativeFeedback>
+        <TouchableNativeFeedback
+          onPress={() => props.navigation.navigate('News')}
+        >
+          <View style={styles.buttonNews}>
+            <Text style={styles.text}>Go to News</Text>
           </View>
         </TouchableNativeFeedback>
       </View>
@@ -34,16 +39,26 @@ const HomeScreen = props => {
 
 const styles = StyleSheet.create({
   buttonsContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-around',
-    padding: 20,
+    alignItems: 'center',
+    padding: 50,
     borderRadius: 25,
     marginVertical: 50
   },
-  buttonDecline: {
+  buttonDocument: {
     backgroundColor: 'red',
     paddingVertical: 12,
-    paddingHorizontal: 30,
+    // paddingHorizontal: 30,
+    margin: 10,
+    borderRadius: 25,
+    width: Dimensions.get('window').width / 1.5
+  },
+  buttonNews: {
+    backgroundColor: '#888',
+    paddingVertical: 12,
+    // paddingHorizontal: 30,
+    margin: 10,
     borderRadius: 25,
     width: Dimensions.get('window').width / 1.5
   },

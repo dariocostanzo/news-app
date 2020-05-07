@@ -7,10 +7,30 @@ import ArticleScreen from '../screens/ArticleScreen';
 import HomeScreen from '../screens/HomeScreen';
 
 const NewsNavigator = createStackNavigator({
-  Home: HomeScreen,
-  Legal: LegalScreen,
-  News: NewsScreen,
-  Article: ArticleScreen
+  Home: {
+    screen: HomeScreen
+  },
+  News: {
+    screen: NewsScreen
+  },
+  Article: {
+    screen: ArticleScreen
+  }
 });
 
-export default createAppContainer(NewsNavigator);
+const RootStack = createStackNavigator(
+  {
+    Main: {
+      screen: NewsNavigator
+    },
+    Legal: {
+      screen: LegalScreen
+    }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none'
+  }
+);
+
+export default createAppContainer(RootStack);
